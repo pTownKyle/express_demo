@@ -2,8 +2,18 @@ doctype html
 html
   head
     title= title
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  body.bg-gray-300.p-6
-    h1.font-thin.text-3xl Express + Pug + Tailwind CSS + Alpine.js
-    p Hi there! This is a simple Express app using Pug, Tailwind CSS and Alpine.js.
+    script(src="https://unpkg.com/@tailwindcss/browser@4")
+    script(defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js")
+    script(src="https://unpkg.com/htmx.org@2.0.4")
+  body.bg-gray-300.p-6(x-data="{ message: 'Alpine.js Is Live!' }")
+    h1.font-thin.text-3xl.mb-3 Express + Pug + Tailwind CSS + Alpine.js + HTMX
+    p Hi there! This is a simple Express app using Pug, Tailwind CSS, Alpine.js, & HTMX
+    p(x-text="message" class="italic")
+
+    div
+      div#textSwap( class="p-6 bg-white w-max text-center my-6") Dummy Text
+      button.p-2.bg-blue-500.text-white.rounded(
+        hx-get="/newmsg"
+        hx-target="#textSwap"
+        hx-swap="innerHTML"
+      ) Change Text
